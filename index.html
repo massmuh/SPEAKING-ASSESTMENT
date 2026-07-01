@@ -343,6 +343,28 @@
     opacity: 0.7;
     margin-top: 16px;
   }
+  @media (max-width: 480px) { .footer-note { display: none; } }
+  @media (max-width: 480px) {
+    body { padding: 0; align-items: flex-start; background: var(--be-white); }
+    .card { border-radius: 0; box-shadow: none; min-height: 100vh; }
+    .card-header { padding: 22px 20px 18px; }
+    .card-header h1 { font-size: 18px; }
+    .body-area { padding: 20px 20px 24px; }
+    .progress-wrap { padding: 14px 20px 0; }
+    .question-title { font-size: 15px; }
+    .option { font-size: 13.5px; padding: 11px 14px 11px 40px; }
+    .btn { font-size: 13px; padding: 12px 18px; }
+    .wa-btn { font-size: 14px; padding: 14px 18px; }
+    .final-state h2 { font-size: 16px; }
+  }
+  @media (min-width: 768px) {
+    body { padding: 40px 24px; }
+    .card { border-radius: 20px; }
+    .card-header h1 { font-size: 23px; }
+  }
+  @media (min-width: 1024px) {
+    body { padding: 60px 24px; }
+  }
 </style>
 </head>
 <body>
@@ -532,7 +554,7 @@
 <script>
   // ====== KONFIGURASI ======
   var APPS_URL = 'https://script.google.com/macros/s/AKfycbycEFRUuuwBm9nYeOZm43wE8qrj0eAd20noLIsZ0m5l8tqsgryNHRpNlqzCtvpBfQgcGw/exec';
-  var WA_ADMIN_NUMBER = '6289517804452';
+  var WA_ADMIN_NUMBER = '6289517804452'; // 089517804452 -> format internasional
 
   // q3 dan q5 = multi-select (array), sisanya single (string)
   var answers = { q1: '', q2: '', q3: [], q4: '', q5: [], q6: '' };
@@ -715,26 +737,32 @@
       q4_kesiapan: answers.q4
     };
 
-    sendToSheet(payload);
-
     var waMessage = 'Halo BantuEnglish, saya ' + nama + '. Saya baru saja menyelesaikan English Speaking Assessment dan ingin mengambil hasil analisis serta roadmap belajar saya. Terima kasih.';
     var waLink = 'https://wa.me/' + WA_ADMIN_NUMBER + '?text=' + encodeURIComponent(waMessage);
     document.getElementById('waButton').setAttribute('href', waLink);
 
-    setTimeout(function() {
+    sendToSheet(payload, function() {
       document.querySelectorAll('.step').forEach(function(el){ el.classList.remove('active'); });
       document.getElementById('step-final').classList.add('active');
-    }, 2400);
+    });
+
+    // Loading screen sudah aktif, final screen muncul via callback sendToSheet
+  
   }
 
-  function sendToSheet(payload) {
+  function sendToSheet(payload, onDone) {
     if (!APPS_URL || APPS_URL.indexOf('PASTE_URL') === 0) {
       console.warn('APPS_URL belum dikonfigurasi.');
+      setTimeout(onDone, 500);
       return;
     }
-    var url = APPS_URL + '?payload=' + encodeURIComponent(JSON.stringify(payload));
-    fetch(url, { method: 'GET', mode: 'no-cors' })
-      .catch(function(err) { console.warn('Sheet error:', err); });
+    var encoded = encodeURIComponent(JSON.stringify(payload));
+    var url = APPS_URL + '?payload=' + encoded;
+    var img = new Image();
+    img.onload = img.onerror = function() { onDone(); };
+    img.src = url;
+    // Fallback: tampilkan halaman final setelah 5 detik apapun hasilnya
+    setTimeout(onDone, 5000);
   }
 </script>
 
