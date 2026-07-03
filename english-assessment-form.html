@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Speaking Assessment — BantuEnglish</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1018039621390497');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1018039621390497&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<style>
+  :root {
+    --be-blue: #001fb8;
+    --be-dark: #404040;
+    --be-white: #ffffff;
+    --be-yellow: #fbca22;
+    --be-font-heading: 'Poppins', Arial, sans-serif;
+    --be-font-body: 'Roboto', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--be-font-body);
+    background: var(--be-blue);
+    color: var(--be-dark);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+  .card {
+    background: var(--be-white);
+    width: 100%;
+    max-width: 560px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    overflow: hidden;
+  }
+  .card-header {
+    background: var(--be-blue);
+    color: var(--be-white);
+    padding: 28px 28px 22px;
+    text-align: center;
+  }
+  .card-header .eyebrow {
+    font-family: var(--be-font-body);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--be-yellow);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .card-header h1 {
+    font-family: var(--be-font-heading);
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 1.35;
+  }
+  .time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(251,202,34,0.15);
+    border: 1px solid var(--be-yellow);
+    color: var(--be-yellow);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-top: 14px;
+  }
+  .progress-wrap {
+    padding: 18px 28px 0;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--be-dark);
+    opacity: 0.65;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .progress-bar {
+    height: 6px;
+    background: #e8e8ee;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--be-yellow);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+  .body-area {
+    padding: 24px 28px 28px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .step { display: none; }
+  .step.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+  .question-title {
+    font-family: var(--be-font-heading);
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--be-blue);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .question-hint {
+    font-size: 12.5px;
+    color: var(--be-dark);
+    opacity: 0.6;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    border: 1.5px solid #d8d8e2;
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-size: 14.5px;
+    color: var(--be-dark);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-weight: 500;
+    position: relative;
+    padding-left: 42px;
+  }
+  .option::before {
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #c4c4d0;
+    background: #fff;
+  }
+  .options.single .option::before { border-radius: 50%; }
+  .options.multi .option::before { border-radius: 5px; }
+  .option:hover { border-color: var(--be-blue); }
+  .option.selected {
+    border-color: var(--be-blue);
+    background: rgba(0,31,184,0.06);
+    color: var(--be-blue);
+    font-weight: 600;
+  }
+  .option.selected::before {
+    background: var(--be-blue);
+    border-color: var(--be-blue);
+  }
+  .options.single .option.selected::before { box-shadow: inset 0 0 0 3px #fff; }
+  .options.multi .option.selected::before {
+    content: "✓";
+    color: #fff;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .option-other-input {
+    margin-top: 8px;
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #d8d8e2;
+    border-radius: 8px;
+    font-family: var(--be-font-body);
+    font-size: 14px;
+    display: none;
+  }
+  .option-other-input.show { display: block; }
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .btn {
+    font-family: var(--be-font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 13px 22px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary { background: var(--be-yellow); color: var(--be-blue); margin-left: auto; }
+  .btn-primary:hover:not(:disabled) { opacity: 0.88; }
+  .btn-secondary { background: transparent; color: var(--be-dark); opacity: 0.6; }
+  .btn-secondary:hover { opacity: 1; }
+  .field-group { margin-bottom: 16px; }
+  .field-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--be-blue);
+    margin-bottom: 6px;
+    font-family: var(--be-font-heading);
+  }
+  .field-input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1.5px solid #d8d8e2;
+    border-radius: 10px;
+    font-family: var(--be-font-body);
+    font-size: 14.5px;
+  }
+  .field-input:focus { outline: none; border-color: var(--be-blue); }
+  .field-error {
+    font-size: 12px;
+    color: #c0392b;
+    margin-top: 5px;
+    display: none;
+  }
+  .intro { text-align: center; }
+  .intro p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--be-dark);
+    margin-bottom: 18px;
+  }
+  .intro ul {
+    text-align: left;
+    list-style: none;
+    margin: 0 0 22px;
+    padding: 0;
+  }
+  .intro li {
+    font-size: 14px;
+    padding: 9px 0 9px 26px;
+    position: relative;
+    border-bottom: 1px solid #eee;
+  }
+  .intro li:last-child { border-bottom: none; }
+  .intro li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--be-blue);
+    font-weight: 700;
+  }
+  /* Loading state */
+  .loading-state {
+    text-align: center;
+    padding: 30px 0;
+  }
+  .spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid #e8e8ee;
+    border-top-color: var(--be-blue);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.9s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-state p {
+    font-family: var(--be-font-heading);
+    font-weight: 600;
+    color: var(--be-blue);
+    font-size: 15px;
+  }
+  /* Final CTA state */
+  .final-state { text-align: center; }
+  .final-state .check-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--be-blue);
+    color: var(--be-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 18px;
+  }
+  .final-state h2 {
+    font-family: var(--be-font-heading);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--be-blue);
+    margin-bottom: 10px;
+  }
+  .final-state p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--be-dark);
+    margin-bottom: 14px;
+  }
+  .bonus-box {
+    background: rgba(251,202,34,0.12);
+    border: 1px dashed var(--be-yellow);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+  .bonus-box .bonus-label {
+    display: inline-block;
+    background: var(--be-yellow);
+    color: var(--be-blue);
+    font-family: var(--be-font-heading);
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .wa-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #25D366;
+    color: #ffffff;
+    font-family: var(--be-font-heading);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 15px 26px;
+    border-radius: 12px;
+    text-decoration: none;
+    width: 100%;
+    box-shadow: 0 4px 14px rgba(37,211,102,0.35);
+  }
+  .wa-btn:hover { background: #1ebe5d; }
+  .wa-btn svg { flex-shrink: 0; }
+  .wa-subnote {
+    font-size: 11.5px;
+    opacity: 0.55;
+    margin-top: 10px;
+  }
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--be-white);
+    opacity: 0.7;
+    margin-top: 16px;
+  }
+  @media (max-width: 480px) { .footer-note { display: none; } }
+  @media (max-width: 480px) {
+    body { padding: 0; align-items: flex-start; background: var(--be-white); }
+    .card { border-radius: 0; box-shadow: none; min-height: 100vh; }
+    .card-header { padding: 22px 20px 18px; }
+    .card-header h1 { font-size: 18px; }
+    .body-area { padding: 20px 20px 24px; }
+    .progress-wrap { padding: 14px 20px 0; }
+    .question-title { font-size: 15px; }
+    .option { font-size: 13.5px; padding: 11px 14px 11px 40px; }
+    .btn { font-size: 13px; padding: 12px 18px; }
+    .wa-btn { font-size: 14px; padding: 14px 18px; }
+    .final-state h2 { font-size: 16px; }
+  }
+  @media (min-width: 768px) {
+    body { padding: 40px 24px; }
+    .card { border-radius: 20px; }
+    .card-header h1 { font-size: 23px; }
+  }
+  @media (min-width: 1024px) {
+    body { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%; max-width:560px;">
+  <div class="card">
+
+    <div class="card-header">
+      <div class="eyebrow">English Speaking Assessment</div>
+      <h1 id="headerTitle">Temukan Apa yang Sebenarnya Menahan Kemampuan Speaking Bahasa Inggris Anda</h1>
+      <div class="time-badge">⏱ Hanya 2 Menit</div>
+    </div>
+
+    <div class="progress-wrap" id="progressWrap" style="display:none;">
+      <div class="progress-label" id="progressLabel">Pertanyaan 1 dari 6</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="body-area">
+
+      <!-- STEP 0: Intro -->
+      <div class="step active" id="step-intro">
+        <div class="intro">
+          <p>Dalam waktu kurang dari 2 menit, Anda akan mengetahui dengan tepat apa yang selama ini menahan kemampuan speaking Anda — dan langkah paling realistis untuk mengatasinya.</p>
+          <ul>
+            <li>Hanya 6 pertanyaan singkat, tidak ada jawaban benar/salah</li>
+            <li>Hasil analisis hambatan utama Anda, dikirim langsung ke WhatsApp</li>
+            <li>Bonus: rekomendasi roadmap belajar yang sesuai dengan kondisi Anda saat ini</li>
+          </ul>
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-primary" style="width:100%; margin-left:0;" onclick="goTo(1)">Mulai Assessment</button>
+        </div>
+      </div>
+
+      <!-- STEP 1: Q1 - Tujuan -->
+      <div class="step" id="step-1">
+        <div class="question-title">Apa tujuan utama Anda belajar Bahasa Inggris?</div>
+        <div class="options single" data-q="q1" data-type="single">
+          <div class="option" data-value="Interview kerja">Interview kerja</div>
+          <div class="option" data-value="Naik karier">Naik karier</div>
+          <div class="option" data-value="Kuliah / Beasiswa">Kuliah / Beasiswa</div>
+          <div class="option" data-value="Traveling">Traveling</div>
+          <div class="option" data-value="Komunikasi kerja / dengan client">Komunikasi kerja / dengan client</div>
+          <div class="option" data-value="Lainnya">Lainnya...</div>
+        </div>
+        <input type="text" class="option-other-input" id="other-q1" placeholder="Tuliskan tujuan Anda">
+        <div class="nav-row">
+          <button class="btn btn-secondary" onclick="goTo(0)">Kembali</button>
+          <button class="btn btn-primary" id="next-1" disabled onclick="goTo(2)">Lanjut</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Q2 - Level -->
+      <div class="step" id="step-2">
+        <div class="question-title">Jika diminta berbicara Bahasa Inggris selama beberapa menit, kondisi Anda saat ini:</div>
+        <div class="options single" data-q="q2" data-type="single">
+          <div class="option" data-value="Belum bisa sama sekali">Belum bisa sama sekali</div>
+          <div class="option" data-value="Bisa sedikit-sedikit">Bisa sedikit-sedikit</div>
+          <div class="option" data-value="Bisa tapi sering mandek">Bisa, tapi sering berhenti di tengah</div>
+          <div class="option" data-value="Sudah lumayan lancar">Sudah cukup lancar</div>
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-secondary" onclick="goTo(1)">Kembali</button>
+          <button class="btn btn-primary" id="next-2" disabled onclick="goTo(3)">Lanjut</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Q3 - Hambatan (multi) -->
+      <div class="step" id="step-3">
+        <div class="question-title">Apa yang paling menghambat Anda selama ini?</div>
+        <div class="question-hint">Bisa pilih lebih dari satu</div>
+        <div class="options multi" data-q="q3" data-type="multi">
+          <div class="option" data-value="Takut salah ngomong">Takut salah saat berbicara</div>
+          <div class="option" data-value="Gak ada partner latihan">Tidak memiliki partner latihan</div>
+          <div class="option" data-value="Gak konsisten belajar">Sulit konsisten belajar</div>
+          <div class="option" data-value="Bingung mulai dari mana">Bingung harus mulai dari mana</div>
+          <div class="option" data-value="Tau teori tapi gak pernah praktek">Paham teori, tapi jarang praktik</div>
+          <div class="option" data-value="Lainnya">Lainnya...</div>
+        </div>
+        <input type="text" class="option-other-input" id="other-q3" placeholder="Tuliskan hambatan lainnya">
+        <div class="nav-row">
+          <button class="btn btn-secondary" onclick="goTo(2)">Kembali</button>
+          <button class="btn btn-primary" id="next-3" disabled onclick="goTo(4)">Lanjut</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Q5 - Pengalaman belajar (multi) -->
+      <div class="step" id="step-4">
+        <div class="question-title">Sebelumnya, apakah Anda pernah mencoba cara tertentu untuk belajar speaking?</div>
+        <div class="question-hint">Bisa pilih lebih dari satu</div>
+        <div class="options multi" data-q="q5" data-type="multi">
+          <div class="option" data-value="Kursus online atau offline">Kursus, online atau offline</div>
+          <div class="option" data-value="Aplikasi belajar">Aplikasi belajar Bahasa Inggris</div>
+          <div class="option" data-value="Nonton/dengar konten Inggris">Menonton / mendengar konten berbahasa Inggris</div>
+          <div class="option" data-value="Otodidak baca buku/grammar">Belajar otodidak (buku, grammar)</div>
+          <div class="option" data-value="Belum pernah coba serius">Belum pernah mencoba secara serius</div>
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-secondary" onclick="goTo(3)">Kembali</button>
+          <button class="btn btn-primary" id="next-4" disabled onclick="goTo(5)">Lanjut</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Q6 - Hambatan eksternal (baru) -->
+      <div class="step" id="step-5">
+        <div class="question-title">Apa yang biasanya membuat rencana belajar Bahasa Inggris Anda gagal di tengah jalan?</div>
+        <div class="options single" data-q="q6" data-type="single">
+          <div class="option" data-value="Sibuk kerja/kuliah">Sibuk kerja / kuliah</div>
+          <div class="option" data-value="Bosan-gak ada progress keliatan">Bosan, tidak terlihat progresnya</div>
+          <div class="option" data-value="Gak ada yang ngingetin-pegang">Tidak ada yang mengingatkan / membimbing</div>
+          <div class="option" data-value="Biaya">Kendala biaya</div>
+          <div class="option" data-value="Lainnya">Lainnya...</div>
+        </div>
+        <input type="text" class="option-other-input" id="other-q6" placeholder="Tuliskan alasan lainnya">
+        <div class="nav-row">
+          <button class="btn btn-secondary" onclick="goTo(4)">Kembali</button>
+          <button class="btn btn-primary" id="next-6" disabled onclick="goTo(6)">Lanjut</button>
+        </div>
+      </div>
+
+      <!-- STEP 6: Q4 - Kesiapan mulai (dipindah ke akhir) -->
+      <div class="step" id="step-6">
+        <div class="question-title">Jika menemukan metode belajar yang sesuai, kapan Anda ingin mulai?</div>
+        <div class="options single" data-q="q4" data-type="single">
+          <div class="option" data-value="Minggu ini">Minggu ini</div>
+          <div class="option" data-value="Bulan ini">Bulan ini</div>
+          <div class="option" data-value="2-3 bulan lagi">2–3 bulan lagi</div>
+          <div class="option" data-value="Masih cari info">Masih mencari informasi</div>
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-secondary" onclick="goTo(5)">Kembali</button>
+          <button class="btn btn-primary" id="next-5" disabled onclick="goTo(7)">Lanjut</button>
+        </div>
+      </div>
+
+      <!-- STEP 7: Nama + WA -->
+      <div class="step" id="step-7">
+        <div class="question-title">Hampir selesai. Masukkan data Anda agar hasil analisis tidak terlewat.</div>
+        <div class="field-group">
+          <label class="field-label">Nama Lengkap</label>
+          <input type="text" class="field-input" id="f-nama" placeholder="Nama Anda">
+          <div class="field-error" id="err-nama">Nama wajib diisi.</div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Nomor WhatsApp Aktif</label>
+          <input type="tel" class="field-input" id="f-wa" placeholder="Contoh: 08123456789">
+          <div class="field-error" id="err-wa">Masukkan nomor WhatsApp aktif yang valid (diawali 08 atau +62).</div>
+        </div>
+        <div class="nav-row">
+          <button class="btn btn-secondary" onclick="goTo(6)">Kembali</button>
+          <button class="btn btn-primary" onclick="submitAssessment()">Kirim Jawaban</button>
+        </div>
+      </div>
+
+      <!-- STEP LOADING -->
+      <div class="step" id="step-loading">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Menganalisis jawaban Anda...</p>
+        </div>
+      </div>
+
+      <!-- STEP FINAL -->
+      <div class="step" id="step-final">
+        <div class="final-state">
+          <div class="check-icon">✓</div>
+          <h2>Hasil Analisis Anda Sudah Siap</h2>
+          <p>Kami sudah mengidentifikasi hambatan utama yang menahan kemampuan speaking Anda selama ini — dan langkah paling realistis untuk mulai mengatasinya, sesuai kondisi Anda. Tekan tombol di bawah sekarang untuk menerimanya langsung di WhatsApp Anda.</p>
+          <div class="bonus-box">
+            <div class="bonus-label">BONUS</div><br>
+            Anda juga akan menerima rekomendasi roadmap belajar pribadi — gratis, sebagai bagian dari hasil assessment ini.
+          </div>
+          <a href="#" id="waButton" class="wa-btn" target="_blank">
+            <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.61 1.826 6.5L4 29l7.75-1.804A11.938 11.938 0 0016 28c6.627 0 12-5.373 12-12S22.627 3 16 3z" fill="rgba(255,255,255,0.25)"/><path d="M22.003 19.108c-.305-.152-1.803-.889-2.082-.99-.278-.1-.481-.152-.684.153-.202.305-.785.99-.962 1.193-.177.203-.354.228-.659.076-.305-.152-1.287-.474-2.452-1.512-.906-.808-1.518-1.806-1.695-2.11-.177-.305-.019-.47.133-.621.136-.136.305-.355.457-.532.152-.178.203-.305.305-.508.101-.203.05-.381-.025-.533-.076-.152-.684-1.65-.937-2.26-.247-.593-.498-.513-.684-.522l-.583-.01a1.12 1.12 0 00-.81.38c-.279.305-1.066 1.041-1.066 2.538s1.091 2.944 1.243 3.147c.152.203 2.147 3.28 5.204 4.6.728.314 1.296.502 1.739.643.73.232 1.395.2 1.92.121.586-.087 1.803-.737 2.057-1.449.254-.71.254-1.32.177-1.449-.075-.127-.279-.203-.583-.355z" fill="#fff"/></svg>
+            Ambil Hasil Assessment &amp; Roadmap Belajar
+          </a>
+          <div class="wa-subnote">Gratis. Hanya tersedia melalui WhatsApp.</div>
+        </div>
+      </div>
+
+      <!-- STEP FINAL (HIGH INTENT: siap mulai minggu/bulan ini) -->
+      <div class="step" id="step-final-hi">
+        <div class="final-state">
+          <div class="check-icon">✓</div>
+          <h2>Hasil Analisis Anda Sudah Siap</h2>
+          <p>Karena Anda siap mulai dalam waktu dekat, tim kami akan bantu susun langkah paling tepat buat kondisi Anda. Tekan tombol di bawah sekarang untuk menerima hasil analisis dan roadmap belajar langsung di WhatsApp Anda.</p>
+          <div class="bonus-box">
+            <div class="bonus-label">BONUS</div><br>
+            Anda juga akan menerima rekomendasi roadmap belajar pribadi, gratis, sebagai bagian dari hasil assessment ini.
+          </div>
+          <a href="#" id="waButtonHi" class="wa-btn" target="_blank" onclick="fireReadyPixel()">
+            <svg width="22" height="22" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 3C9.373 3 4 8.373 4 15c0 2.385.668 4.61 1.826 6.5L4 29l7.75-1.804A11.938 11.938 0 0016 28c6.627 0 12-5.373 12-12S22.627 3 16 3z" fill="rgba(255,255,255,0.25)"/><path d="M22.003 19.108c-.305-.152-1.803-.889-2.082-.99-.278-.1-.481-.152-.684.153-.202.305-.785.99-.962 1.193-.177.203-.354.228-.659.076-.305-.152-1.287-.474-2.452-1.512-.906-.808-1.518-1.806-1.695-2.11-.177-.305-.019-.47.133-.621.136-.136.305-.355.457-.532.152-.178.203-.305.305-.508.101-.203.05-.381-.025-.533-.076-.152-.684-1.65-.937-2.26-.247-.593-.498-.513-.684-.522l-.583-.01a1.12 1.12 0 00-.81.38c-.279.305-1.066 1.041-1.066 2.538s1.091 2.944 1.243 3.147c.152.203 2.147 3.28 5.204 4.6.728.314 1.296.502 1.739.643.73.232 1.395.2 1.92.121.586-.087 1.803-.737 2.057-1.449.254-.71.254-1.32.177-1.449-.075-.127-.279-.203-.583-.355z" fill="#fff"/></svg>
+            Ambil Hasil Assessment &amp; Roadmap Belajar
+          </a>
+          <div class="wa-subnote">Gratis. Hanya tersedia melalui WhatsApp.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="footer-note">BantuEnglish — English Speaking Assessment</div>
+</div>
+
+<script>
+  // ====== KONFIGURASI ======
+  var APPS_URL = 'https://script.google.com/macros/s/AKfycbycEFRUuuwBm9nYeOZm43wE8qrj0eAd20noLIsZ0m5l8tqsgryNHRpNlqzCtvpBfQgcGw/exec';
+  var WA_ADMIN_NUMBER = '6289517804452'; // 089517804452 -> format internasional
+
+  // q3 dan q5 = multi-select (array), sisanya single (string)
+  var answers = { q1: '', q2: '', q3: [], q4: '', q5: [], q6: '' };
+  var totalQuestions = 6;
+  var currentStep = 0;
+
+  function goTo(stepIndex) {
+    document.querySelectorAll('.step').forEach(function(el){ el.classList.remove('active'); });
+    if (stepIndex === 0) {
+      document.getElementById('step-intro').classList.add('active');
+      document.getElementById('progressWrap').style.display = 'none';
+    } else if (stepIndex >= 1 && stepIndex <= 6) {
+      document.getElementById('step-' + stepIndex).classList.add('active');
+      document.getElementById('progressWrap').style.display = 'block';
+      updateProgress(stepIndex);
+    } else if (stepIndex === 7) {
+      document.getElementById('step-7').classList.add('active');
+      document.getElementById('progressWrap').style.display = 'block';
+      updateProgress(6.5);
+    }
+    currentStep = stepIndex;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateProgress(step) {
+    var pct = Math.min((step / totalQuestions) * 100, 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    var displayStep = Math.min(Math.ceil(step), totalQuestions);
+    document.getElementById('progressLabel').textContent = 'Pertanyaan ' + displayStep + ' dari ' + totalQuestions;
+  }
+
+  // step number -> next button id mapping (karena urutan visual step != nomor q asli)
+  var stepToNextBtn = { 1: 'next-1', 2: 'next-2', 3: 'next-3', 4: 'next-4', 5: 'next-6', 6: 'next-5' };
+
+  document.querySelectorAll('.options').forEach(function(group) {
+    var qKey = group.getAttribute('data-q');
+    var type = group.getAttribute('data-type');
+    var options = group.querySelectorAll('.option');
+    var stepEl = group.closest('.step');
+    var stepNum = stepEl.id.replace('step-', '');
+
+    options.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        var val = opt.getAttribute('data-value');
+        var otherInput = document.getElementById('other-' + qKey);
+
+        if (type === 'single') {
+          options.forEach(function(o){ o.classList.remove('selected'); });
+          opt.classList.add('selected');
+          if (val === 'Lainnya' && otherInput) {
+            otherInput.classList.add('show');
+            otherInput.focus();
+            answers[qKey] = '';
+            checkOtherInputSingle(qKey, stepNum);
+          } else {
+            if (otherInput) otherInput.classList.remove('show');
+            answers[qKey] = val;
+            enableNext(stepNum, true);
+          }
+        } else {
+          // multi-select toggle
+          opt.classList.toggle('selected');
+          var isSelected = opt.classList.contains('selected');
+
+          if (val === 'Lainnya' && otherInput) {
+            if (isSelected) {
+              otherInput.classList.add('show');
+              otherInput.focus();
+            } else {
+              otherInput.classList.remove('show');
+              otherInput.value = '';
+            }
+          }
+          syncMultiAnswers(qKey, group, otherInput);
+          enableNext(stepNum, multiValid(qKey, group, otherInput));
+        }
+      });
+    });
+
+    var otherInput = document.getElementById('other-' + qKey);
+    if (otherInput) {
+      otherInput.addEventListener('input', function() {
+        if (type === 'single') {
+          checkOtherInputSingle(qKey, stepNum);
+        } else {
+          syncMultiAnswers(qKey, group, otherInput);
+          enableNext(stepNum, multiValid(qKey, group, otherInput));
+        }
+      });
+    }
+  });
+
+  function checkOtherInputSingle(qKey, stepNum) {
+    var otherInput = document.getElementById('other-' + qKey);
+    var val = otherInput.value.trim();
+    answers[qKey] = val;
+    enableNext(stepNum, val.length > 0);
+  }
+
+  function multiValid(qKey, group, otherInput) {
+    var lainnyaOpt = group.querySelector('.option[data-value="Lainnya"]');
+    var lainnyaSelected = lainnyaOpt && lainnyaOpt.classList.contains('selected');
+    var lainnyaFilled = otherInput ? otherInput.value.trim().length > 0 : true;
+    if (lainnyaSelected && !lainnyaFilled) return false;
+    return answers[qKey].length > 0;
+  }
+
+  function syncMultiAnswers(qKey, group, otherInput) {
+    var selected = [];
+    group.querySelectorAll('.option.selected').forEach(function(o) {
+      var v = o.getAttribute('data-value');
+      if (v === 'Lainnya') {
+        var customVal = otherInput ? otherInput.value.trim() : '';
+        if (customVal.length > 0) selected.push(customVal);
+      } else {
+        selected.push(v);
+      }
+    });
+    answers[qKey] = selected;
+  }
+
+  function enableNext(stepNum, ok) {
+    var btnId = stepToNextBtn[stepNum];
+    var btn = document.getElementById(btnId);
+    if (!btn) return;
+    btn.disabled = !ok;
+  }
+
+  function validateWA(value) {
+    var cleaned = value.replace(/[\s-]/g, '');
+    return /^(08\d{8,11}|\+?62\d{8,12})$/.test(cleaned);
+  }
+
+  function formatWANumber(value) {
+    var cleaned = value.replace(/[\s-]/g, '');
+    if (cleaned.startsWith('+62')) return cleaned.replace('+', '');
+    if (cleaned.startsWith('62')) return cleaned;
+    if (cleaned.startsWith('0')) return '62' + cleaned.substring(1);
+    return cleaned;
+  }
+
+  function submitAssessment() {
+    var nama = document.getElementById('f-nama').value.trim();
+    var wa = document.getElementById('f-wa').value.trim();
+    var errNama = document.getElementById('err-nama');
+    var errWa = document.getElementById('err-wa');
+    var valid = true;
+
+    if (nama.length < 2) {
+      errNama.style.display = 'block';
+      valid = false;
+    } else {
+      errNama.style.display = 'none';
+    }
+
+    if (!validateWA(wa)) {
+      errWa.style.display = 'block';
+      valid = false;
+    } else {
+      errWa.style.display = 'none';
+    }
+
+    if (!valid) return;
+
+    var waFormatted = formatWANumber(wa);
+
+    document.querySelectorAll('.step').forEach(function(el){ el.classList.remove('active'); });
+    document.getElementById('step-loading').classList.add('active');
+    document.getElementById('progressWrap').style.display = 'none';
+
+    var payload = {
+      timestamp: new Date().toISOString(),
+      nama: nama,
+      whatsapp: waFormatted,
+      q1_tujuan: answers.q1,
+      q2_level: answers.q2,
+      q3_hambatan: answers.q3.join(', '),
+      q5_pengalaman: answers.q5.join(', '),
+      q6_alasan_gagal: answers.q6,
+      q4_kesiapan: answers.q4
+    };
+
+    var waMessage = 'Halo BantuEnglish, saya ' + nama + '. Saya baru saja menyelesaikan English Speaking Assessment dan ingin mengambil hasil analisis serta roadmap belajar saya. Terima kasih.';
+    var waLink = 'https://wa.me/' + WA_ADMIN_NUMBER + '?text=' + encodeURIComponent(waMessage);
+    document.getElementById('waButton').setAttribute('href', waLink);
+    document.getElementById('waButtonHi').setAttribute('href', waLink);
+
+    // High intent: siap mulai minggu ini / bulan ini -> halaman final khusus (yang ada pixel-nya)
+    var isHighIntent = (answers.q4 === 'Minggu ini' || answers.q4 === 'Bulan ini');
+
+    sendToSheet(payload, function() {
+      document.querySelectorAll('.step').forEach(function(el){ el.classList.remove('active'); });
+      document.getElementById(isHighIntent ? 'step-final-hi' : 'step-final').classList.add('active');
+    });
+
+    // Loading screen sudah aktif, final screen muncul via callback sendToSheet
+  
+  }
+
+  // Pixel high-intent: nyala HANYA pas tombol WA di halaman final khusus diklik
+  function fireReadyPixel() {
+    if (typeof window.fbq === 'function') {
+      window.fbq('track', 'Lead', { content_name: 'English Speaking Assessment' });
+      window.fbq('trackCustom', 'ReadyToStartLead', { kesiapan: answers.q4 });
+    }
+  }
+
+  function sendToSheet(payload, onDone) {
+    if (!APPS_URL || APPS_URL.indexOf('PASTE_URL') === 0) {
+      console.warn('APPS_URL belum dikonfigurasi.');
+      setTimeout(onDone, 500);
+      return;
+    }
+    var encoded = encodeURIComponent(JSON.stringify(payload));
+    var url = APPS_URL + '?payload=' + encoded;
+    var img = new Image();
+    img.onload = img.onerror = function() { onDone(); };
+    img.src = url;
+    // Fallback: tampilkan halaman final setelah 5 detik apapun hasilnya
+    setTimeout(onDone, 5000);
+  }
+</script>
+
+</body>
+</html>
